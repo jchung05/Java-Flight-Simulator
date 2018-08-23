@@ -7,7 +7,8 @@ abstract class Aircraft {
   }
 
   private long nextId() {
-
+    //TODO
+    return -1;
   }
   
   protected long        id;

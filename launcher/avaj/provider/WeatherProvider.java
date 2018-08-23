@@ -20,6 +20,7 @@ public class WeatherProvider {
 
   public String getCurrentWeather(Coordinates coordinates) {
     //TODO
+    return "";
   }
 
   private static WeatherProvider weatherProvider;
