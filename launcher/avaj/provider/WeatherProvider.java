@@ -2,27 +2,23 @@ package launcher.avaj.provider;
 
 import launcher.avaj.aircraft.*;
 
-public class WeatherProvider {
+public final class WeatherProvider {
   private WeatherProvider() {}
 
-  static {
-    try {
-      weatherProvider = new WeatherProvider();
-
-    } catch(Exception e){
-      throw new RuntimeException("Bad singleton instantiation");
-    }
-  }
-
   public static WeatherProvider getProvider() {
+    if (weatherProvider == null) {
+      weatherProvider = new WeatherProvider();
+    }
+    
     return weatherProvider;
   }
 
   public String getCurrentWeather(Coordinates coordinates) {
-    //TODO
-    return "";
+    Integer i = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
+    i = i < 0 ? -i : i;
+    return weather[i % 4];
   }
 
-  private static WeatherProvider weatherProvider;
+  private static WeatherProvider weatherProvider = null;
   private static String[] weather = {"RAIN", "FOG", "SUN", "SNOW"};
 }

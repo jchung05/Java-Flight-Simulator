@@ -34,12 +34,17 @@ public class JetPlane extends Aircraft implements Flyable {
           this.coordinates.getLatitude() - 7,
           this.coordinates.getHeight()
         );
+    //TODO
+    //Make a printout when height <= 0
     }
   }
 
   @Override
   public void registerTower(WeatherTower weatherTower) {
-
+    this.weatherTower = weatherTower;
+    weatherTower.register(this);
+    //TODO
+    //Make a printout for registration to tower
   }
 
   private WeatherTower weatherTower;
