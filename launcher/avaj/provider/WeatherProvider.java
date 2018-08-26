@@ -1,6 +1,8 @@
 package launcher.avaj.provider;
 
 import launcher.avaj.aircraft.*;
+import java.util.Random;
+import java.lang.Math;
 
 public final class WeatherProvider {
   private WeatherProvider() {}
@@ -14,9 +16,7 @@ public final class WeatherProvider {
   }
 
   public String getCurrentWeather(Coordinates coordinates) {
-    Integer i = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
-    i = i < 0 ? -i : i;
-    return weather[i % 4];
+    return weather[Math.abs(new Random().nextInt()) % 4];
   }
 
   private static WeatherProvider weatherProvider = null;

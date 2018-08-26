@@ -1,6 +1,8 @@
 package launcher.avaj.aircraft;
 
-abstract class AircraftFactory {
+import launcher.avaj.exceptions.*;
+
+public abstract class AircraftFactory {
   private AircraftFactory() {}
 
   public static Flyable newAircraft(String type, String name, int longitude, int latitude, int height)
@@ -14,6 +16,8 @@ abstract class AircraftFactory {
 
     try {
       switch(type) {
+        case "Baloon":
+          throw new MisspelledBalloonException("You spelled balloon wrong bruh");
         case "Balloon":
           return new Balloon(name, coordinates);
         case "Helicopter":
@@ -21,9 +25,10 @@ abstract class AircraftFactory {
         case "JetPlane":
           return new JetPlane(name, coordinates);
         default:
-          throw new Exception("Bad aircraft type");
+          throw new BadAircraftException("Bad aircraft type");
       }
     } catch (Exception e) {
+      e.printStackTrace();
       System.out.println(e);
     } return null;
   }

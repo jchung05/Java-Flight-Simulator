@@ -1,6 +1,6 @@
 package launcher.avaj.aircraft;
 
-abstract class Aircraft {
+public abstract class Aircraft {
   protected Aircraft(String name, Coordinates coordinates) {
     this.name = name;
     this.coordinates = coordinates;
