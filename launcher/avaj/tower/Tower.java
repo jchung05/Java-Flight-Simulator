@@ -5,7 +5,6 @@ import launcher.avaj.aircraft.*;
 
 abstract class Tower {
   public void register(Flyable flyable) {
-    System.out.printf("Tower says: ");
     observers.add(flyable);
   }
 

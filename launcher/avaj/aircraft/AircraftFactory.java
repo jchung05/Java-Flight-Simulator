@@ -5,13 +5,15 @@ import launcher.avaj.exceptions.*;
 public abstract class AircraftFactory {
   private AircraftFactory() {}
 
-  public static Flyable newAircraft(String type, String name, int longitude, int latitude, int height)
+  public static Flyable newAircraft(String type, String name, int longitude, int latitude, int height) throws BadAircraftException, MisspelledBalloonException
   {
     Coordinates coordinates = null;
     try {
       coordinates = new Coordinates(longitude, latitude, height);
     } catch (Exception e) {
-      System.out.println("Your coordinates don't exist in this realm");
+      e.printStackTrace();
+      System.out.println(e);
+      System.exit(0);
     }
 
     try {

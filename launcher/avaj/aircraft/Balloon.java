@@ -1,6 +1,7 @@
 package launcher.avaj.aircraft;
 
 import launcher.avaj.tower.*;
+import launcher.avaj.logger.*;
 
 public class Balloon extends Aircraft implements Flyable {
   Balloon(String name, Coordinates coordinates) {
@@ -11,7 +12,6 @@ public class Balloon extends Aircraft implements Flyable {
   public void updateConditions() {
     String identifier = "Balloon#" + this.name + "(" + this.id + ")";
 
-    System.out.printf("%s", identifier);
     switch(weatherTower.getWeather(this.coordinates)) {
       case "SUN":
         this.coordinates = new Coordinates(
@@ -19,7 +19,7 @@ public class Balloon extends Aircraft implements Flyable {
           this.coordinates.getLatitude(),
           this.coordinates.getHeight() + 4
         );
-        System.out.println(": Balloon melt");
+        Logger.getLogger().addLog(identifier + ": Balloon melt");
         break;
       case "RAIN":
         this.coordinates = new Coordinates(
@@ -27,7 +27,7 @@ public class Balloon extends Aircraft implements Flyable {
           this.coordinates.getLatitude(),
           this.coordinates.getHeight() - 5
         );
-        System.out.println(": Balloon wet");
+        Logger.getLogger().addLog(identifier + ": Balloon wet");
         break;
       case "FOG":
         this.coordinates = new Coordinates(
@@ -35,7 +35,7 @@ public class Balloon extends Aircraft implements Flyable {
           this.coordinates.getLatitude(),
           this.coordinates.getHeight() - 3
         );
-        System.out.println(": Balloon no see");
+        Logger.getLogger().addLog(identifier + ": Balloon no see");
         break;
       case "SNOW":
         this.coordinates = new Coordinates(
@@ -43,15 +43,15 @@ public class Balloon extends Aircraft implements Flyable {
           this.coordinates.getLatitude(),
           this.coordinates.getHeight() - 15
         );
-        System.out.println(": Balloon cold");
+        Logger.getLogger().addLog(identifier + ": Balloon cold");
         break;
     }
 
     if (this.coordinates.getHeight() <= 0)
     {
-      System.out.println(identifier + " landing.");
+      Logger.getLogger().addLog(identifier + " landing.");
       this.weatherTower.unregister(this);
-      System.out.println("Tower says: " + identifier + " unregistered from the weather tower.");
+      Logger.getLogger().addLog("Tower says: " + identifier + " unregistered from the weather tower.");
     }
   }
 
@@ -59,7 +59,7 @@ public class Balloon extends Aircraft implements Flyable {
   public void registerTower(WeatherTower weatherTower) {
     this.weatherTower = weatherTower;
     weatherTower.register(this);
-    System.out.println("Balloon#" + this.name + "(" + this.id + ") registered to the tower.");
+    Logger.getLogger().addLog("Tower says: Balloon#" + this.name + "(" + this.id + ") registered to the tower.");
   }
 
   private WeatherTower weatherTower;

@@ -1,6 +1,7 @@
 package launcher.avaj.aircraft;
 
 import launcher.avaj.tower.*;
+import launcher.avaj.logger.*;
 
 public class Helicopter extends Aircraft implements Flyable {
   Helicopter(String name, Coordinates coordinates) {
@@ -11,7 +12,6 @@ public class Helicopter extends Aircraft implements Flyable {
   public void updateConditions() {
     String identifier = "Helicopter#" + this.name + "(" + this.id + ")";
 
-    System.out.printf("%s", identifier);
     switch(weatherTower.getWeather(this.coordinates)) {
       case "SUN":
         this.coordinates = new Coordinates(
@@ -19,7 +19,7 @@ public class Helicopter extends Aircraft implements Flyable {
           this.coordinates.getLatitude(),
           this.coordinates.getHeight() + 2
         );
-        System.out.println(": This is hot.");
+        Logger.getLogger().addLog(identifier + ": This is hot.");
         break;
       case "RAIN":
         this.coordinates = new Coordinates(
@@ -27,7 +27,7 @@ public class Helicopter extends Aircraft implements Flyable {
           this.coordinates.getLatitude(),
           this.coordinates.getHeight()
         );
-        System.out.println(": It sure is wet outside!");
+        Logger.getLogger().addLog(identifier + ": It sure is wet outside!");
         break;
       case "FOG":
         this.coordinates = new Coordinates(
@@ -35,7 +35,7 @@ public class Helicopter extends Aircraft implements Flyable {
           this.coordinates.getLatitude(),
           this.coordinates.getHeight()
         );
-        System.out.println(": It's hot enough to cook an egg on the dash right now!");
+        Logger.getLogger().addLog(identifier + ": It's hot enough to cook an egg on the dash right now!");
         break;
       case "SNOW":
         this.coordinates = new Coordinates(
@@ -43,15 +43,15 @@ public class Helicopter extends Aircraft implements Flyable {
           this.coordinates.getLatitude(),
           this.coordinates.getHeight() - 12
         );
-        System.out.println(": My rotor is going to freeze!");
+        Logger.getLogger().addLog(identifier + ": My rotor is going to freeze!");
         break;
     }
 
     if (this.coordinates.getHeight() <= 0)
     {
-      System.out.println(identifier + " landing.");
+      Logger.getLogger().addLog(identifier + " landing.");
       this.weatherTower.unregister(this);
-      System.out.println("Tower says: " + identifier + " unregistered from the weather tower.");
+      Logger.getLogger().addLog("Tower says: " + identifier + " unregistered from the weather tower.");
     }
   }
 
@@ -59,7 +59,7 @@ public class Helicopter extends Aircraft implements Flyable {
   public void registerTower(WeatherTower weatherTower) {
     this.weatherTower = weatherTower;
     weatherTower.register(this);
-    System.out.println("Helicopter#" + this.name + "(" + this.id + ") registered to weather tower.");
+    Logger.getLogger().addLog("Tower says: Helicopter#" + this.name + "(" + this.id + ") registered to weather tower.");
   }
 
   private WeatherTower weatherTower;
