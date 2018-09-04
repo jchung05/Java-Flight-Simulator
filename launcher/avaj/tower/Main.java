@@ -23,6 +23,8 @@ class Main {
         if ((line = br.readLine()) != null) {
           numSimulations = Integer.valueOf(line);
         }
+        if (numSimulations < 1)
+          throw new InvalidArgumentException("Invalid number of simulations");
         //System.out.println(numSimulations);
         while ((line = br.readLine()) != null) {
           String []arr = line.split("\\s+");
