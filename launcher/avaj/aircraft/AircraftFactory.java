@@ -8,13 +8,7 @@ public abstract class AircraftFactory {
   public static Flyable newAircraft(String type, String name, int longitude, int latitude, int height) throws BadAircraftException, MisspelledBalloonException
   {
     Coordinates coordinates = null;
-    try {
-      coordinates = new Coordinates(longitude, latitude, height);
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println(e);
-      System.exit(0);
-    }
+    coordinates = new Coordinates(longitude, latitude, height);
 
     try {
       switch(type) {
