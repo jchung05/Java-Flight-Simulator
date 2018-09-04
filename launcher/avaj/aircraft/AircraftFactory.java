@@ -30,7 +30,6 @@ public abstract class AircraftFactory {
           throw new BadAircraftException("Bad aircraft type");
       }
     } catch (Exception e) {
-      e.printStackTrace();
       System.out.println(e);
     } return null;
   }

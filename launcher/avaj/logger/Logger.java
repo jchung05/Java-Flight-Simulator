@@ -36,7 +36,6 @@ public class Logger {
             bufferedWriter.write(str);
             bufferedWriter.close();
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println(e);
         }
     }
